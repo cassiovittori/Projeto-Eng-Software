@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  height: auto;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(128, 128, 128, 0.24);
+}
+
+.labels {
+  width: 90%;
+}
+
+section {
+  width: 50%;
+  min-height: 100vh; // Substituído "height" por "min-height"
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 5px double #00005c;
+  border-top: none;
+  border-bottom: none;
+  background-color: white;
+}
+
+.sDireita {
+  margin-left: 25px;
+}
+
+.sEsquerda {
+  margin-right: 25px;
+  justify-content: center;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  background-color: #191847;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: 0.3s ease;
+  padding: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #0f0f2c;
+}
+
+.sDireita h2 {
+  margin-bottom: 35px;
+  margin-top: 30px;
+  border-radius: 5px;
+  background-color: #00005c;
+  width: 80%;
+  height: 5vh;
+  color: white;
+  text-align: center;
+}
+
+.sDireita label {
+  min-width: 50%;
+  max-width: 70%;
+  padding: 5px;
+  padding-left: 0;
+  margin: 10px;
+  border-bottom: 1px solid #000000;
+  background: transparent;
+}
+
+/* Adicionado estilo para as novas labels */
+.labels[for="doenca-cronica"],
+.labels[for="doenca"],
+.labels[for="cirurgia"],
+.labels[for="medicacao-atual"],
+.labels[for="medicacao-anterior"] {
+  width: 70%;
+}
+
+.card {
+  width: 60%;
+  height: 80%;
+  background: #00005c;
+  border-radius: 15px;
+  box-shadow: 1px 5px 60px 0px #100a886b;
+}
+
+.card .card-border-top {
+  width: 60%;
+  height: 3%;
+  background: #4E4EC2;
+  margin: auto;
+  border-radius: 0px 0px 15px 15px;
+}
+
+.imagem {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sEsquerda img {
+  margin-top: -50px;
+  background-color: none;
+  width: 38vh;
+  height: 38vh;
+  border-radius: 100%;
+  border: 2px solid white;
+}
+
+.sEsquerda button {
+  color: white;
+  margin-top: 60px;
+  padding: 8px;
+  border: 1px solid #00005c;
+  border-radius: 10px;
+  font-weight: 500;
+  width: 100px;
+  background-color: #4E4EC2;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button {
+  color: white;
+  border: 1px solid #00005c;
+  border-radius: 10px;
+  font-weight: 500;
+  width: 100px;
+  background-color: #4E4EC2;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #4e4ec26c;
+}
+
+.sEsquerda button:hover {
+  background-color: #4e4ec26c;
+}

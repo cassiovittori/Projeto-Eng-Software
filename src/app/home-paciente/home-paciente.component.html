@@ -1,0 +1,219 @@
+<body>
+  <div class="barra-esquerda">
+    <div class="container">
+      <form>
+        <label for="radioInicio">
+          <input type="radio" name="radio" id="radioInicio" [(ngModel)]="inicio" [value]="'inicio'"
+            (change)="onRadioChange('inicio')">
+          <span>Início</span>
+        </label>
+        <label for="radioProntuario">
+          <input type="radio" name="radio" id="radioProntuario" [(ngModel)]="prontuario" [value]="'prontuario'"
+            (change)="onRadioChange('prontuario')">
+          <span>Histórico médico</span>
+        </label>
+        <label for="radioMostrarMedicamentos">
+          <input type="radio" name="radio" id="radioMostrarMedicamentos" [(ngModel)]="mostrarMedicamentos" [value]="'mostrarMedicamentos'"
+            (change)="onRadioChange('mostrarMedicamentos')">
+          <span>Receitas Médicas</span>
+        </label>
+        <label for="radioExameUploa">
+          <input type="radio" name="radio" id="radioExameUploa" [(ngModel)]="exameUpload" [value]="'exameUpload'"
+            (change)="onRadioChange('exameUpload')">
+          <span>Upload de exames recentes</span>
+        </label>
+        <label for="radiosuasConsultas">
+          <input type="radio" name="radio" id="radiosuasConsultas" [(ngModel)]="suasConsultas" [value]="'suasConsultas'"
+            (change)="onRadioChange('suasConsultas')">
+          <span>Suas consultas</span>
+        </label>
+        <label for="radioExameUploa">
+          <div class="perfilMedico">
+            <button style="margin-top: 15px;" class="custom-btn butonStyle" (click)="redirectPerfilMedico()">Marcar uma Consulta</button>
+          </div>
+        </label>
+
+      </form>
+
+    </div>
+  </div>
+  <div class="barra-direita">
+    <div class="borda-de-cima">
+      <label><span class="title" style= "color: rgb(0, 0, 90);">Informações do Paciente</span></label>
+      <button class="Btn" (click)="logOut()">
+
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+
+        <div class="text">Sair</div>
+      </button>
+
+
+
+    </div>
+    <div *ngIf="inicio" class="borda-de-baixo">
+      <div class="quadrado">
+        <form class="form">
+          <span class="title">{{paciente.nomePaciente}}</span>
+          <p class="description">Data de nascimento: {{paciente.dataNascPaciente}}
+            <br>
+            Sexo: {{paciente.sexo}}
+            <br>
+            Endereço residencial: rua joarene - mangabeira
+          </p>
+        </form>
+
+      </div>
+      <div class="quadrado">
+        <form class="form">
+          <span class="title">Informações de Contato e emergência</span>
+          <p class="description">contato eletrônico: {{paciente.contatoPaciente}} <br>
+            Cpf: {{paciente.cpf}} <br>
+            Contato de emergência:<br>
+            Nome: {{paciente.nomeCttEmergencia}} <br>
+            Numero:  1234-5678</p>
+        </form>
+      </div>
+
+    </div>
+
+    <div *ngIf="prontuario" class="borda-de-baixo">
+      <div class="quadrado">
+        <form class="form">
+          <span class="title"> Antecedentes Médicos:</span>
+          <p class="description">
+           Doenças anteriores: {{historico.doencasAnteriores}}
+            <br>
+            Doenças Crônicas:{{historico.doencasCronicas}}
+             <br>
+           Alergias: {{historico.alergias}}
+            <br>
+            Cirurgias recentes:  {{historico.cirurgiasAnteriores}}
+          </p>
+        </form>
+      </div>
+      <div class="quadrado">
+        <form class="form">
+          <span class="title">Medicamentos em Uso Atual:
+          </span>
+          <p class="description">
+          Medicamento: {{historico.medicacoesAtuais}}
+        <br>
+       Anteriormente usava: {{historico.medicacoesAnteriores}} </p>
+        </form>
+      </div>
+
+   </div>
+   <div *ngIf="mostrarMedicamentos" class="borda-de-baixo">
+    <!--Cria um novo "Quadrado para cada medicamento"-->
+      <!-- Cria um novo "Quadrado para cada medicamento" -->
+<div class="medicamento">
+  <mat-form-field class="aumentar">
+    <mat-label>Busque aqui</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. João silva" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSourcePdfs" class="mat-elevation-z8">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+
+    <!-- Médico Column -->
+    <ng-container matColumnDef="medico">
+      <th mat-header-cell *matHeaderCellDef>Médico</th>
+      <td mat-cell *matCellDef="let element">{{element.medico}}</td>
+    </ng-container>
+
+    <!-- URL do PDF Column -->
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>URL do PDF</th>
+      <td mat-cell *matCellDef="let element"> <a href="{{element.url}}">{{element.url}}</a></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsPdfs"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsPdfs;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="3">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+</div>
+
+  </div>
+  <div *ngIf="exameUpload" class="borda-de-baixo">
+    <div class="card__content" style="justify-content: center;">
+      <div class="div-gerenciaA textFormat">
+        <p style="margin-left: 35%; color: #151516;">Faça aqui o upload dos seus exames anteriores<br></p>
+        <p style="margin-left: 40%; color: #151516;">(Só pode enviar um por vez)</p>
+        <div class="botoes">
+          <!-- Outros botões existentes -->
+          <input class="butonStyle" type="file" id="pdfInput" style="margin-right: 100px;" (change)="selecionarArquivo($event)" >
+          <!-- Input de arquivo PDF oculto -->
+        </div>
+        <br>
+        <div>
+        <mat-form-field style="width: 60%;">
+          <mat-label>Envie alguma observação(opcional):</mat-label>
+          <textarea matInput [(ngModel)]="observacao"></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field style=" width: 60%; height:100px;" class="input" required="" placeholder="Selecione um médico">
+          <mat-label >Enviar para o médico</mat-label>
+          <mat-select name="medico" [(ngModel)]="selectedMedico">
+            <mat-option *ngFor="let medico of medicoTypes" [value]="medico">{{ medico }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+        <button class="butonStyle" style="margin-left: 45%; margin-top: 90px" id="enviarButton" (click)="enviarPdf()">Enviar</button>
+
+      </div>
+    </div>
+
+ </div>
+ <div *ngIf="suasConsultas" class="borda-de-baixo">
+  <div class="medicamento">
+    <mat-form-field class="aumentar">
+      <mat-label>Busque aqui</mat-label>
+      <input matInput (keyup)="applyFilterConsulas($event)" placeholder="Ex. dor de cabeça" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSourceSuasConsultas" class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="motivo">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let element">{{ element.motivo }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="medico">
+        <th mat-header-cell *matHeaderCellDef>Médico</th>
+        <td mat-cell *matCellDef="let element">{{ element.medico }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef>Data da consulta</th>
+        <td mat-cell *matCellDef="let element">{{ element.data }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="hora">
+        <th mat-header-cell *matHeaderCellDef>Horário da consulta</th>
+        <td mat-cell *matCellDef="let element">{{ element.hora }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsSuasConsultas"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsSuasConsultas"></tr>
+
+      <tr class="mat-row" *matNoDataRow style="margin-left: 15px;">
+        <td class="mat-cell"  colspan="4">Não foi encontrado nenhum resultado</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+  </div>
+
+</body>

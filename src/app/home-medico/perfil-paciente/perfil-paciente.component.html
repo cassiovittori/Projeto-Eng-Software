@@ -1,0 +1,47 @@
+<body>
+
+  <section class="sDireita">
+      <h2>Informações pessoais</h2>
+      <label for="nome" class="labels nome"><strong>Nome do Paciente: {{nomePaciente}}</strong></label>
+      <label for="idade" class="labels idade"><strong>Data de Nascimento: {{dataNascPaciente}}</strong></label>
+      <label for="sexo" class="labels sexo"><strong>Sexo: {{sexo}}</strong></label>
+      <label for="rg" class="labels rg"><strong>CPF: {{cpf}}</strong></label>
+      <h2>Informações médicas</h2>
+      <label class="labels" for="doenca"><strong>Doenças Anteriores: {{infoAddTaked.doencasAnteriores}}</strong></label>
+      <label class="labels" for="doenca"><strong>Doenças Crônicas: {{infoAddTaked.doencasCronicas}}</strong></label>
+      <label class="labels" for="alergia"><strong>Alergias: {{infoAddTaked.alergias}}</strong></label>
+      <label class="labels" for="cirurgia"><strong>Cirurgias Anteriores: {{infoAddTaked.cirurgiasAnteriores}}</strong></label>
+      <label class="labels" for="medicacao-atual"><strong>Medicações Atuais: {{infoAddTaked.medicacoesAtuais}}</strong></label>
+      <label class="labels" for="medicacao-anterior"><strong>Medicações Anteriores: {{infoAddTaked.medicacoesAnteriores}}</strong></label>
+
+      <div style="display: flex; ">
+        <button class="submit" (click)="cadstrarInformacoes()">Alterar Informações</button>
+        <button class="submit" (click)="redirectHomeMedico()">Voltar</button>
+      </div>
+
+
+  </section>
+  <section class="sDireita">
+    <h2>Histórico de Exames</h2>
+<table mat-table [dataSource]="dataSourceHistorico" class="mat-elevation-z8">
+
+  <!-- Nome do Exame -->
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell *matHeaderCellDef> Nome do Exame </th>
+    <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+  </ng-container>
+
+  <!-- URL -->
+  <ng-container matColumnDef="url">
+    <th mat-header-cell *matHeaderCellDef> URL </th>
+    <td mat-cell *matCellDef="let element"><a href=" {{element.url}}">Clique aqui para baixa-lo</a></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsHistorico"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsHistorico;"></tr>
+</table>
+
+
+  </section>
+
+</body>

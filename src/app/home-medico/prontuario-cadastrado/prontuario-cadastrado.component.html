@@ -1,0 +1,61 @@
+<html>
+  <body>
+    <section class="logo">
+        <h1>Prontuário</h1>
+    </section>
+
+    <section class="informacoes">
+        <h3>Informações pessoais</h3>
+        <form class="example-form forma">
+          <mat-form-field  class="example-full-width">
+            <mat-label  for="nome">Nome:</mat-label>
+            <input matInput placeholder="Digite seu nome" id="nome" name="nome" [(ngModel)]="nomePaciente">
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label  for="idade">Idade:</mat-label>
+            <input matInput placeholder="Digite sua idade" id="idade" name="idade" [(ngModel)]="idadePaciente">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Sexo:</mat-label>
+            <input matInput #inputElement placeholder="Selecione seu sexo:" id="sexo" name="sexo"
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto"
+                   (input)="filter(inputElement)"
+                   (focus)="filter(inputElement)">
+            <mat-autocomplete requireSelection #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label for="contato">Contato:</mat-label>
+            <input matInput placeholder="Digite seu contato" type="text" id="contato" name="contato" [(ngModel)]="contatoPaciente">
+          </mat-form-field>
+          <mat-form-field  class="example-full-width">
+            <mat-label for="rg">Rg:</mat-label>
+            <input matInput placeholder="Digite seu rg" type="text" id="rg" name="rg" [(ngModel)]="rgPaciente">
+          </mat-form-field>
+        </form>
+
+        <h3>Informações médicas</h3>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="doenca">Doença:</mat-label>
+          <input matInput placeholder="Insira aqui" id="doenca" name="doenca" [(ngModel)]="doencasPaciente">
+        </mat-form-field>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="alergias">Alergia:</mat-label>
+          <input matInput placeholder="Insira aqui" id="alergias" name="alergias" [(ngModel)]="alergiaPaciente">
+        </mat-form-field>
+        <mat-form-field  class="example-full-width">
+          <mat-label  for="historico">Histórico familiar de Doença:</mat-label>
+          <input matInput placeholder="Insira aqui" id="historico" name="historico" [(ngModel)]="historicoPaciente">
+        </mat-form-field>
+    </section>
+
+    <section class="botoes">
+        <button (click)="enviar()" >Enviar</button>
+        <button (click)="redirectHomeMedico()">Cancelar</button>
+    </section>
+</body>
+</html>

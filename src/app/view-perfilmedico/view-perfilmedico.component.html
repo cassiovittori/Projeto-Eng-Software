@@ -1,0 +1,75 @@
+<body class="geral">
+
+  <div class="container">
+    <mat-card class="example-card">
+      <div *ngIf="agendarConsulta"  class="lado2">
+        <form class="form">
+          <p class="title">Agende aqui a sua consulta</p>
+          <p class="message">Preencha abaixo os campos e agende a sua consulta</p>
+          <div class="flex">
+            <label>
+              <input required="" placeholder="" type="text" class="input"  name="nome" [(ngModel)]="nome">
+              <span>Nome</span>
+            </label>
+
+            <label>
+              <input required="" placeholder="" type="text" class="input" name="sobrenome" [(ngModel)]="sobrenome">
+              <span>Sobrenome</span>
+            </label>
+          </div>
+
+          <label>
+            <input required="" placeholder="" type="email" class="input"  name="email"[(ngModel)]="email">
+            <span>Email</span>
+          </label>
+          <label>
+            <mat-form-field class="input" required="" placeholder="Selecione um médico">
+              <mat-label>Escolha um médico</mat-label>
+              <mat-select name="medico" [(ngModel)]="selectedMedico" (ngModelChange)="onMedicoSelected($event)">
+                <mat-option *ngFor="let medico of arrayMedicos; let i = index" [value]="i">
+                  {{ medico }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </label>
+
+
+            <div class="flex2" style="width: 373px;">
+              <label class="input"> Escolha uma data
+                <input type="date" id="data" name="data" class="input" name="data" [(ngModel)]="data" style="width: auto; margin-top:20px;" >
+              </label>
+
+              <label style="margin-left: 45px;" for="horario" >Escolha um horário de início:<br>
+                <select id="horario" name="horario" [(ngModel)]="horario" class="input">
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="13:00">11:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <!-- Adicione mais opções de horário conforme necessário -->
+                </select>
+              </label>
+            </div>
+          <label>
+            <mat-form-field class="input">
+              <mat-label>Digite aqui o motivo da sua consulta</mat-label>
+              <textarea matInput name="motivoExame" [(ngModel)]="motivoExame" [ngModelOptions]="{standalone: true}"></textarea>
+            </mat-form-field>
+          </label>
+        <div class="alinharBotoes">
+          <button class="submit" (click)="sendInfo()">Enviar Solicitação de Agendamento</button>
+          <button  class="submit" (click)="canelar()">cancelar</button>
+        </div>
+        </form>
+      </div>
+
+    </mat-card>
+
+  </div>
+
+
+</body>
